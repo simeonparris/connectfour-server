@@ -24,8 +24,3 @@ const addPlayer = function(playerName, playerNumber) {
     }
 }
 
-addPlayer('bob', 1);
-addPlayer('fred', 2);
-addPlayer('fred', 3);
-console.log(`Player One's name is ${player1.name}`);
-console.log(`Player Two's name is ${player2.name}`);
