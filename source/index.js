@@ -27,7 +27,8 @@ const addPlayer = function(playerName, playerNumber) {
 }
 
 // Bindings for click events
-const startButton = $("#start-button")
+const startButton = $("#start-button");
+startButton.click(addPlayer);
 
 module.exports = {addPlayer};
 
