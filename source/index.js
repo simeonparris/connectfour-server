@@ -24,3 +24,6 @@ const addPlayer = function(playerName, playerNumber) {
     }
 }
 
+module.exports = {addPlayer};
+
+

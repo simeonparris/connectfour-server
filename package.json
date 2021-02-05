@@ -1,0 +1,23 @@
+{
+  "name": "ConnectFour",
+  "version": "1.0.0",
+  "description": "This is my individual project for the first half of the Infinity Works Academy.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simeonparris/connectfour.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simeonparris/connectfour/issues"
+  },
+  "homepage": "https://github.com/simeonparris/connectfour#readme",
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
+}
