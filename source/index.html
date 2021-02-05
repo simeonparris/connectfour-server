@@ -3,19 +3,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="main.css" rel="stylesheet" type="text/css">
-    
-    <title>Simeon's Connect Four</title>
-    
+    <title>Simeon's Connect Four</title>  
 </head>
 <body>
     <h1>Welcome to Connect Four</h1>
-    <form id="playerNameInputForm" action="">
-        <label for="playerOneNameInput">Player 1:</label>
-        <input type="text" name="playerOneNameInput">
-    </form>
-    <form id="playerNameInputForm" action="">
-        <label for="playerTwoNameInput">Player 2:</label>
-        <input type="text" name="playerTwoNameInput">
+    <form id="player-name-input-form" action="">
+        <div id="player-one-input-area">
+            <label for="player-one-name-input">Player 1:</label>
+            <input type="text" name="player-one-name-input">
+        </div>
+        <div id="player-one-input-area">
+            <label for="player-two-name-input">Player 2:</label>
+            <input type="text" name="player-two-name-input">
+        </div>
+        <button id="start-button">START</button>
     </form>   
 
     <script src="index.js" type="text/javascript"></script>

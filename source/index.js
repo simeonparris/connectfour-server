@@ -12,6 +12,8 @@ class Player {
 }
 
 // functions
+
+
 const addPlayer = function(playerName, playerNumber) {
     if (playerNumber === 1 && player1 === undefined) {
         if (playerName === "") playerName = "Mr No-Name";
@@ -23,6 +25,9 @@ const addPlayer = function(playerName, playerNumber) {
         console.log('Please enter a valid player name and/or player number!');
     }
 }
+
+// Bindings for click events
+const startButton = $("#start-button")
 
 module.exports = {addPlayer};
 
