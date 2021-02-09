@@ -5,15 +5,16 @@ describe("Testing addPlayer function", () => {
         const newPlayerName = '';
         const newPlayerNumber = 2;
         const functionOutput = index.addPlayer(newPlayerName, newPlayerNumber);
-        const expectedOutput = {name: "Little Miss No-Name"};
-        expect(functionOutput.toString()).toStrictEqual(expectedOutput.toString());
+        console.log(`testing addPlayer: the function output is ${functionOutput.toString()}.`);
+        expect(functionOutput.playerName).toStrictEqual("Little Miss No-Name");
+        expect(functionOutput.playerNumber).toStrictEqual(2);
     });
     test("accepts a valid player name and valid number", () => {
         const newPlayerName = 'Fred';
         const newPlayerNumber = 1;
         const functionOutput = index.addPlayer(newPlayerName, newPlayerNumber);
-        const expectedOutput = {name: "Fred"};
-        expect(functionOutput.toString()).toStrictEqual(expectedOutput.toString());
+        expect(functionOutput.playerName).toStrictEqual("Fred");
+        expect(functionOutput.playerNumber).toStrictEqual(1);
     });
     test("does not accept an invalid player name and a valid number", () => {
         const newPlayerName = 1;
