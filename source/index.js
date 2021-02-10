@@ -45,19 +45,24 @@ function startGame () {
 }
 
 // Bindings for click events
-const startButton = $("#start-button");
-startButton.click(startGame);
+// const startButton = $("#start-button");
+// startButton.click(startGame);
 
 // init starts the program.
 const init = () => {
     document
         .getElementById('start-button')
-        .addEventListener('click', addPlayer);
+        .addEventListener('click', startGame);
         console.log("clicking start button");
 }
 
 document.addEventListener('DOMContentLoaded', init);
 
-module.exports = {addPlayer};
+module.exports = {
+    addPlayer, 
+    startGame,
+    playerOneObject,
+    playerTwoObject,
+};
 
 
