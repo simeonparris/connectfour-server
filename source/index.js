@@ -1,8 +1,8 @@
 console.log('Running index.js');
 console.log(document.documentElement.innerHTML);
 // variables available in the global scope
-let player1 = undefined;
-let player2 = undefined;
+let playerOneObject = undefined;
+let playerTwoObject = undefined;
 // classes
 class Player {
     playerName = "";
@@ -23,11 +23,11 @@ function addPlayer(playerName, playerNumber) {
         console.log('Please enter a valid player name and/or player number!');
         return;
     }
-    if (playerNumber === 1 && player1 === undefined) {
+    if (playerNumber === 1 && playerOneObject === undefined) {
         // assign player 1 name from HTML input or random name
         if (playerName === "") playerName = "Mr No-Name";
         return new Player(playerName, playerNumber);
-    } else if (playerNumber === 2 && player2 === undefined) {
+    } else if (playerNumber === 2 && playerTwoObject === undefined) {
         // assign player 2 name from HTML input or random name
         if (playerName === "") playerName = "Little Miss No-Name";
         return new Player(playerName, playerNumber);
@@ -36,9 +36,17 @@ function addPlayer(playerName, playerNumber) {
     }
 }
 
+function startGame () {
+    const playerOneName = $('#player-one-name-input').value;
+    const playerTwoName = $('#player-two-name-input').value;
+    playerOneObject = addPlayer(playerOneName, 1);
+    playerTwoObject = addPlayer(playerTwoName, 2);
+
+}
+
 // Bindings for click events
-// const startButton = $("#start-button");
-// startButton.click(addPlayer);
+const startButton = $("#start-button");
+startButton.click(startGame);
 
 // init starts the program.
 const init = () => {
