@@ -24,3 +24,12 @@ describe("Testing addPlayer function", () => {
         expect(functionOutput).toStrictEqual(expectedOutput);
     });
 });
+
+// cannot test startGame function as it manipulates the DOM
+// describe('test the startGame function', () => {
+//     test('reassigns player*Object variables with a player Object', () => {
+//         index.startGame();
+//         expect(typeof index.playerOneObject).toStrictEqual('object');
+//         expect(typeof index.playerTwoObject).toStrictEqual('object');
+//     });
+// });
