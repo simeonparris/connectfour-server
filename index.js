@@ -15,8 +15,6 @@ class Player {
 }
 
 // functions
-
-
 function addPlayer(playerName, playerNumber) {
     // returns undefined if an invalid data type is entered
     if (typeof playerName !== 'string' || typeof playerNumber !== 'number') {
@@ -37,26 +35,28 @@ function addPlayer(playerName, playerNumber) {
 }
 
 function startGame () {
-    const playerOneName = $('#player-one-name-input').value;
-    const playerTwoName = $('#player-two-name-input').value;
-    playerOneObject = addPlayer(playerOneName, 1);
-    playerTwoObject = addPlayer(playerTwoName, 2);
-
+    const playerOneNameInput = document.getElementById('player-one-name-input').innerText;
+    const playerTwoNameInput = document.getElementById('player-two-name-input').innerText;
+    playerOneObject = addPlayer(playerOneNameInput, 1);
+    playerTwoObject = addPlayer(playerTwoNameInput, 2);
+    console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
+    document.getElementById('player-name-input-form').hidden = true;
+    document.getElementById('start-button').hidden = true;
 }
 
 // Bindings for click events
-// const startButton = $("#start-button");
-// startButton.click(startGame);
+const startButton = $("#start-button");
+startButton.click(startGame);
 
 // init starts the program.
-const init = () => {
-    document
-        .getElementById('start-button')
-        .addEventListener('click', startGame);
-        console.log("clicking start button");
-}
+// const init = () => {
+//     document
+//         .getElementById('start-button')
+//         .addEventListener('click', startGame);
+//         console.log("clicking start button");
+// }
 
-document.addEventListener('DOMContentLoaded', init);
+// document.addEventListener('DOMContentLoaded', init);
 
 module.exports = {
     addPlayer, 
