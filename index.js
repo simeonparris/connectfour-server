@@ -14,6 +14,26 @@ class Player {
     }
 }
 
+class connectFourGrid {
+    grid
+
+    constructor(numberOfRows, numberOfColumns) {
+        this.grid = this.initializeGrid();
+    }
+
+    initializeGrid(numberOfRows, numberOfColumns) {
+        let gridWidthArray = [];
+        let initializedGrid = [];
+        for(let i = 0; i < numberOfColumns; i++) {
+            gridWidthArray.push("empty");
+        }
+        for(let j = 0; j < numberOfRows; j++) {
+            initializedGrid.push(gridWidthArray);
+        }
+        return initializedGrid;
+    }
+}
+
 // functions
 function addPlayer(playerName, playerNumber) {
     // returns undefined if an invalid data type is entered
