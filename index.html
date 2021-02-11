@@ -3,7 +3,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="main.css" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Simeon's Connect Four</title>  
 </head>
 <body>
@@ -18,10 +17,13 @@
             <input type="text" id="player-two-name-input" name="player-two-name-input">
         </div>
     </form>   
-
+    <button id="start-button">START</button>
+    <div id="player-name-display-area" display="none" >
+        <h2 class="player-name-display" >Player One: <span id="player-one-name-display"></span></h2>
+        <h2 class="player-name-display" >Player Two: <span id="player-two-name-display"></span></h2>
+    </div>
     <p id="box-to-fill"></p>
     
-    <button id="start-button">START</button>
     <script src="index.js"></script>
 </body>
 </html>

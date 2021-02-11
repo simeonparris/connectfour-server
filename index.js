@@ -35,19 +35,22 @@ function addPlayer(playerName, playerNumber) {
 }
 
 function startGame () {
-    const playerOneNameInput = document.getElementById('player-one-name-input').innerHTML;
-    const playerTwoNameInput = document.getElementById('player-two-name-input').innerHTML;
+    const playerOneNameInput = document.getElementById('player-one-name-input').value;
+    const playerTwoNameInput = document.getElementById('player-two-name-input').value;
     playerOneObject = addPlayer(playerOneNameInput, 1);
     playerTwoObject = addPlayer(playerTwoNameInput, 2);
     console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
+    document.getElementById('player-one-name-display').append(playerOneObject.playerName);
+    document.getElementById('player-two-name-display').append(playerTwoObject.playerName);
     document.getElementById('player-name-input-form').hidden = true;
     document.getElementById('start-button').hidden = true;
+    document.getElementById('player-name-display-area').hidden = false;
     document.getElementById('box-to-fill').append('Here be TEXT!');
 }
 
 // Bindings for click events
 const startButton = document.getElementById("start-button");
-startButton.addEventListener("click", startGame);
+startButton.addEventListener("click", () => startGame());
 
 // init starts the program.
 // const init = () => {
