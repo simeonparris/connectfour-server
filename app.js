@@ -1,3 +1,6 @@
+const classes = require('./classes');
+const pf = require('./pure-functions');
+
 console.log('Running index.js');
 console.log(document.documentElement.innerHTML);
 // variables available in the global scope
@@ -5,65 +8,15 @@ let playerOneObject = undefined;
 let playerTwoObject = undefined;
 
 let currentConnectFourGrid = [];
-// classes
-class Player {
-    playerName = "";
-    playerNumber = 0;
-
-    constructor(newPlayerName, newPlayerNumber) {
-        this.playerName = newPlayerName;
-        this.playerNumber = newPlayerNumber;
-    }
-}
-
-class connectFourGrid {
-
-    constructor(numberOfRows, numberOfColumns) {
-        this.grid = this.initializeGrid(numberOfRows, numberOfColumns);
-    }
-
-    initializeGrid(numberOfRows, numberOfColumns) {
-        let gridWidthArray = [];
-        let initializedGrid = [];
-        for(let i = 0; i < numberOfColumns; i++) {
-            gridWidthArray.push("empty");
-        }
-        for(let j = 0; j < numberOfRows; j++) {
-            initializedGrid.push(gridWidthArray);
-        }
-        return initializedGrid;
-    }
-
-    getGrid() {
-        return this.grid;
-    }
-}
 
 // functions
-function addPlayer(playerName, playerNumber) {
-    // returns undefined if an invalid data type is entered
-    if (typeof playerName !== 'string' || typeof playerNumber !== 'number') {
-        console.log('Please enter a valid player name and/or player number!');
-        return;
-    }
-    if (playerNumber === 1 && playerOneObject === undefined) {
-        // assign player 1 name from HTML input or random name
-        if (playerName === "") playerName = "Mr No-Name";
-        return new Player(playerName, playerNumber);
-    } else if (playerNumber === 2 && playerTwoObject === undefined) {
-        // assign player 2 name from HTML input or random name
-        if (playerName === "") playerName = "Little Miss No-Name";
-        return new Player(playerName, playerNumber);
-    } else {
-        console.log('addPlayer: something has gone seriously wrong!');
-    }
-}
+
 
 function startGame () {
     const playerOneNameInput = document.getElementById('player-one-name-input').value;
     const playerTwoNameInput = document.getElementById('player-two-name-input').value;
-    playerOneObject = addPlayer(playerOneNameInput, 1);
-    playerTwoObject = addPlayer(playerTwoNameInput, 2);
+    playerOneObject = pf.addPlayer(playerOneNameInput, 1);
+    playerTwoObject = pf.addPlayer(playerTwoNameInput, 2);
     console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
     currentConnectFourGrid = generateNewGrid(6, 7);
     hideNameInputBoxes();
@@ -103,13 +56,10 @@ startButton.addEventListener("click", () => startGame());
 // document.getElementById('box-to-fill').append('Here be TEXT!');
 
 
-module.exports = {
-    addPlayer, 
+module.exports = { 
     startGame,
     playerOneObject,
     playerTwoObject,
-    connectFourGrid,
-    Player,
 };
 
 
