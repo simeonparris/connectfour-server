@@ -7,11 +7,11 @@ function addPlayer(playerName, playerNumber) {
         console.log('Please enter a valid player name and/or player number!');
         return;
     }
-    if (playerNumber === 1 && playerOneObject === undefined) {
+    if (playerNumber === 1) {
         // assign player 1 name from HTML input or random name
         if (playerName === "") playerName = "Mr No-Name";
         return new classes.Player(playerName, playerNumber);
-    } else if (playerNumber === 2 && playerTwoObject === undefined) {
+    } else if (playerNumber === 2) {
         // assign player 2 name from HTML input or random name
         if (playerName === "") playerName = "Little Miss No-Name";
         return new classes.Player(playerName, playerNumber);

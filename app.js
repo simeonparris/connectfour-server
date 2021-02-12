@@ -53,9 +53,6 @@ startButton.addEventListener("click", () => startGame());
 
 // document.addEventListener('DOMContentLoaded', init);
 
-// document.getElementById('box-to-fill').append('Here be TEXT!');
-
-
 module.exports = { 
     startGame,
     playerOneObject,

@@ -1,4 +1,3 @@
-const app = require('../app');
 const classes = require('../classes');
 const pf = require('../pure-functions');
 
