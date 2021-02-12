@@ -1,8 +1,7 @@
 const classes = require('./classes');
 const pf = require('./pure-functions');
 
-console.log('Running index.js');
-console.log(document.documentElement.innerHTML);
+console.log('Running app.js');
 // variables available in the global scope
 let playerOneObject = undefined;
 let playerTwoObject = undefined;
@@ -10,8 +9,6 @@ let playerTwoObject = undefined;
 let currentConnectFourGrid = [];
 
 // functions
-
-
 function startGame () {
     const playerOneNameInput = document.getElementById('player-one-name-input').value;
     const playerTwoNameInput = document.getElementById('player-two-name-input').value;
@@ -37,8 +34,6 @@ function generateNewGrid(numberOfRows, numberOfColumns) {
     return newGrid.grid;
 }
 
-console.log(`The Current Game Grid: is coming up...`);
-console.log(`The Current Game Grid: ${currentConnectFourGrid}`);
 // Bindings for click events
 const startButton = document.getElementById("start-button");
 startButton.addEventListener("click", () => startGame());
