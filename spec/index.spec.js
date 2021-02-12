@@ -25,6 +25,23 @@ describe("Testing addPlayer function", () => {
     });
 });
 
+describe("test connectFourGrid class", () => {
+    test("the grid attribute has an empty grid when the class is instantiated", () => {
+        let classInstance = new index.connectFourGrid(6, 7);
+        console.log(`TESTING connectFourGrid: the grid attribute is ${classInstance.grid}.`);
+        let newGrid = classInstance.getGrid();
+        let expectedGrid = [
+            ["empty","empty","empty","empty","empty","empty","empty"],
+            ["empty","empty","empty","empty","empty","empty","empty"],
+            ["empty","empty","empty","empty","empty","empty","empty"],
+            ["empty","empty","empty","empty","empty","empty","empty"],
+            ["empty","empty","empty","empty","empty","empty","empty"],
+            ["empty","empty","empty","empty","empty","empty","empty"],
+        ];
+        expect(newGrid).toStrictEqual(expectedGrid);
+    });
+});
+
 // cannot test startGame function as it manipulates the DOM
 // describe('test the startGame function', () => {
 //     test('reassigns player*Object variables with a player Object', () => {
