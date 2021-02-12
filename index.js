@@ -17,10 +17,9 @@ class Player {
 }
 
 class connectFourGrid {
-    grid
 
     constructor(numberOfRows, numberOfColumns) {
-        this.initializeGrid(numberOfRows, numberOfColumns);
+        this.grid = this.initializeGrid(numberOfRows, numberOfColumns);
     }
 
     initializeGrid(numberOfRows, numberOfColumns) {
@@ -32,8 +31,7 @@ class connectFourGrid {
         for(let j = 0; j < numberOfRows; j++) {
             initializedGrid.push(gridWidthArray);
         }
-        this.grid = this.initializedGrid;
-        // return initializedGrid;
+        return initializedGrid;
     }
 
     getGrid() {
@@ -110,6 +108,8 @@ module.exports = {
     startGame,
     playerOneObject,
     playerTwoObject,
+    connectFourGrid,
+    Player,
 };
 
 
