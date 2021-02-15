@@ -25,11 +25,6 @@ function hideNameInputBoxes() {
     document.getElementById('player-name-display-area').display = "block";
 }
 
-function generateNewGrid(numberOfRows, numberOfColumns) {
-    let newGrid = new connectFourGrid(numberOfRows, numberOfColumns);
-    return newGrid;
-}
-
 function drawGrid(numberOfRows, numberOfColumns) {
     console.log(`drawGrid: Drawing a grid with ${numberOfRows} rows and ${numberOfColumns} columns...`)
     let currentGridBody = document.getElementById("grid-body");
