@@ -36,11 +36,11 @@ function drawGrid(numberOfRows, numberOfColumns) {
     for (let rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
         let gridRow = document.createElement("tr");
         gridRow.id = `row-${rowIndex}`;
-        gridRow.class = "grid-row";
+        gridRow.classList.add("row");
         currentGridBody.appendChild(gridRow);
         for (let columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
             let gridCell = document.createElement("td");
-            gridCell.class = "grid-cell";
+            gridCell.classList.add("grid-cell");
             gridCell.id = `row-${rowIndex}-column-${columnIndex}`;
             const emptyCellText = document.createTextNode("empty");
             gridCell.appendChild(emptyCellText);
