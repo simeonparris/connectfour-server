@@ -14,6 +14,7 @@ function startGame () {
     console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
     currentConnectFourGrid = generateNewGrid(6, 7);
     hideNameInputBoxes();
+    drawGrid(3, 4);
 }
 
 function hideNameInputBoxes() {
@@ -22,12 +23,30 @@ function hideNameInputBoxes() {
     document.getElementById('player-name-input-form').hidden = true;
     document.getElementById('start-button').hidden = true;
     document.getElementById('player-name-display-area').display = "block";
-    document.getElementById('box-to-fill').append('Here be TEXT!');
 }
 
 function generateNewGrid(numberOfRows, numberOfColumns) {
     let newGrid = new connectFourGrid(numberOfRows, numberOfColumns);
     return newGrid.getGrid();
+}
+
+function drawGrid(numberOfRows, numberOfColumns) {
+    console.log(`drawGrid: Drawing a grid with ${numberOfRows} rows and ${numberOfColumns} columns...`)
+    let currentGridBody = document.getElementById("grid-body");
+    for (let rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
+        let gridRow = document.createElement("tr");
+        gridRow.id = `row-${rowIndex}`;
+        gridRow.class = "grid-row";
+        currentGridBody.appendChild(gridRow);
+        for (let columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
+            let gridCell = document.createElement("td");
+            gridCell.class = "grid-cell";
+            gridCell.id = `row-${rowIndex}-column-${columnIndex}`;
+            const emptyCellText = document.createTextNode("empty");
+            gridCell.appendChild(emptyCellText);
+            gridRow.appendChild(gridCell);
+        } 
+    }
 }
 
 // Bindings for click events
