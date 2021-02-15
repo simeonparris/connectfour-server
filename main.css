@@ -2,10 +2,6 @@ body {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#row-0-column-0 {
-    color: red;
-}
-
 .grid-cell {
     margin: 5px;
     padding: 5px;

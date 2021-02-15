@@ -3,7 +3,7 @@ console.log('Running app.js');
 let playerOneObject = undefined;
 let playerTwoObject = undefined;
 
-let currentConnectFourGrid = [];
+let currentConnectFourGridObject;
 
 // functions
 function startGame () {
@@ -12,7 +12,7 @@ function startGame () {
     playerOneObject = addPlayer(playerOneNameInput, 1);
     playerTwoObject = addPlayer(playerTwoNameInput, 2);
     console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
-    currentConnectFourGrid = generateNewGrid(6, 7);
+    currentConnectFourGridObject = generateNewGrid(6, 7);
     hideNameInputBoxes();
     drawGrid(3, 4);
 }
@@ -27,7 +27,7 @@ function hideNameInputBoxes() {
 
 function generateNewGrid(numberOfRows, numberOfColumns) {
     let newGrid = new connectFourGrid(numberOfRows, numberOfColumns);
-    return newGrid.getGrid();
+    return newGrid;
 }
 
 function drawGrid(numberOfRows, numberOfColumns) {
