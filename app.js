@@ -12,9 +12,13 @@ function startGame () {
     playerOneObject = addPlayer(playerOneNameInput, 1);
     playerTwoObject = addPlayer(playerTwoNameInput, 2);
     console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
-    currentConnectFourGridObject = generateNewGrid(6, 7);
+    const newGridObject = generateNewGrid(6, 7);
+    currentConnectFourGridObject = newGridObject;
+    const newGrid = newGridObject.getGrid();
+    console.log(`startGame: the new grid to draw is ${newGrid}.`);
+    console.log(`startGame: the length of the new grid is ${newGrid.length}.`);
     hideNameInputBoxes();
-    drawGrid(3, 4);
+    drawGrid(newGrid);
 }
 
 function hideNameInputBoxes() {
@@ -25,15 +29,17 @@ function hideNameInputBoxes() {
     document.getElementById('player-name-display-area').display = "block";
 }
 
-function drawGrid(numberOfRows, numberOfColumns) {
-    console.log(`drawGrid: Drawing a grid with ${numberOfRows} rows and ${numberOfColumns} columns...`)
+function drawGrid(gridToDraw) {
+    console.log(`drawGrid: Drawing a grid with ${gridToDraw.length} rows...`)
     let currentGridBody = document.getElementById("grid-body");
-    for (let rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
+    for (let rowIndex = 0; rowIndex < gridToDraw.length; rowIndex++) {
+        console.log(`drawGrid: populating row ${rowIndex}.`);
         let gridRow = document.createElement("tr");
         gridRow.id = `row-${rowIndex}`;
         gridRow.classList.add("row");
         currentGridBody.appendChild(gridRow);
-        for (let columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
+        for (let columnIndex = 0; columnIndex < gridToDraw[rowIndex].length; columnIndex++) {
+            console.log(`drawGrid: populating cell ${columnIndex} of row ${rowIndex}.`);
             let gridCell = document.createElement("td");
             gridCell.classList.add("grid-cell");
             gridCell.id = `row-${rowIndex}-column-${columnIndex}`;
