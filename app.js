@@ -68,6 +68,7 @@ function clearGrid() {
 
 function takeTurn(columnNumber) {
     // TODO - update grid
+    console.log(`takeTurn: the grid before placing a counter is ${currentConnectFourGridObject.getGrid()}.`);
     currentConnectFourGridObject.placeCounterInColumn(columnNumber);
     console.log(`takeTurn: the grid is now ${currentConnectFourGridObject.getGrid()}.`);
 }
