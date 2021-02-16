@@ -45,6 +45,7 @@ function drawGrid(gridToDraw) {
             gridCell.id = `row-${rowIndex}-column-${columnIndex}`;
             const emptyCellText = document.createTextNode("empty");
             gridCell.appendChild(emptyCellText);
+            gridCell.addEventListener("click", () => console.log(`drawGrid: you clicked on cell R${rowIndex} C${columnIndex}.`));
             gridRow.appendChild(gridCell);
         } 
     }
