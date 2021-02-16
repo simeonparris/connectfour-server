@@ -30,6 +30,7 @@ function hideNameInputBoxes() {
 }
 
 function drawGrid(gridToDraw) {
+    // TODO make this function draw a full-sized grid
     console.log(`drawGrid: Drawing a grid with ${gridToDraw.length} rows...`)
     let currentGridBody = document.getElementById("grid-body");
     for (let rowIndex = 0; rowIndex < gridToDraw.length; rowIndex++) {
@@ -43,12 +44,40 @@ function drawGrid(gridToDraw) {
             let gridCell = document.createElement("td");
             gridCell.classList.add("grid-cell");
             gridCell.id = `row-${rowIndex}-column-${columnIndex}`;
-            const emptyCellText = document.createTextNode("empty");
-            gridCell.appendChild(emptyCellText);
-            gridCell.addEventListener("click", () => console.log(`drawGrid: you clicked on cell R${rowIndex} C${columnIndex}.`));
+            const cellText = document.createTextNode(gridToDraw[rowIndex][columnIndex]);
+            gridCell.appendChild(cellText);
+            gridCell.addEventListener("click", () => handleCellClick(rowIndex, columnIndex));
             gridRow.appendChild(gridCell);
         } 
     }
+}
+
+function clearGrid() {
+    const currentGridBody = document.getElementById("grid-body");
+    console.log(`clearGrid: the number of child nodes is ${currentGridBody.childNodes.length}.`);
+    //const numberOfChildNodes = currentGridBody.childNodes.length;
+    while (currentGridBody.firstChild) {
+        console.log(`clearGrid: removing the child node ${currentGridBody.lastChild}.`);
+        currentGridBody.removeChild(currentGridBody.lastChild);
+    }
+    // for (let index = 0; index < numberOfChildNodes; index++) {
+    //     console.log(`clearGrid: the child node is: ${currentGridBody.childNodes[index]}.`);
+    //     currentGridBody.removeChild(currentGridBody.childNodes[index]);
+    // }
+}
+
+function takeTurn(columnNumber) {
+    // TODO - update grid
+    currentConnectFourGridObject.placeCounterInColumn(columnNumber);
+    console.log(`takeTurn: the grid is now ${currentConnectFourGridObject.getGrid()}.`);
+}
+
+function handleCellClick(rowIndex, columnIndex) {
+    console.log(`drawGrid: you clicked on cell R${rowIndex} C${columnIndex}.`);
+    takeTurn(columnIndex);
+    const updatedGrid = currentConnectFourGridObject.getGrid();
+    clearGrid()
+    drawGrid(updatedGrid);
 }
 
 // Bindings for click events

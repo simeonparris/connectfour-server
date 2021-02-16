@@ -30,6 +30,21 @@ class connectFourGrid {
     getGrid() {
         return this.grid;
     }
+
+    placeCounterInColumn(columnNumber) {
+        for (let rowIndex = this.grid.length - 1; rowIndex > 0; rowIndex--) {
+            // TODO - write loop to only place counter in the first free position
+            if (this.grid[rowIndex][columnNumber] === "filled") {
+                console.log(`placeCounterInColumn: grid R${rowIndex} C${columnNumber} is filled - moving to the next row.`)
+            } else {
+                console.log(`placeCounterInColumn: grid R${rowIndex} C${columnNumber} is empty - filling the cell.`);
+                this.grid[rowIndex][columnNumber] = "filled";
+                console.log(`placeCounterInColumn: grid R${rowIndex} C${columnNumber} is now ${this.grid[rowIndex][columnNumber]}.`);
+                break;
+            }
+            
+        }
+    }
 }
 
 module.exports = {
