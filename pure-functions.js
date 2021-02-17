@@ -1,3 +1,12 @@
+if (typeof exports === 'object') {
+    console.log("Running in Node")
+    // Node. Does not work with strict CommonJS, but only CommonJS-like 
+    // environments that support module.exports, like Node.
+    global.Player = require('./classes').Player;
+} else {
+    console.log("Running in Browser")
+}
+
 function addPlayer(playerName, playerNumber) {
     // returns undefined if an invalid data type is entered
     if (typeof playerName !== 'string' || typeof playerNumber !== 'number') {
@@ -14,6 +23,7 @@ function addPlayer(playerName, playerNumber) {
         return new Player(playerName, playerNumber);
     } else {
         console.log('addPlayer: something has gone seriously wrong!');
+        return;
     }
 }
 

@@ -40,7 +40,7 @@ function drawGrid(gridToDraw) {
         gridRow.classList.add("row");
         currentGridBody.appendChild(gridRow);
         for (let columnIndex = 0; columnIndex < gridToDraw[rowIndex].length; columnIndex++) {
-            console.log(`drawGrid: populating cell ${columnIndex} of row ${rowIndex}.`);
+            console.log(`drawGrid: populating cell ${columnIndex} of row ${rowIndex} with ${gridToDraw[rowIndex][columnIndex]}.`);
             let gridCell = document.createElement("td");
             gridCell.classList.add("grid-cell");
             gridCell.id = `row-${rowIndex}-column-${columnIndex}`;
@@ -74,7 +74,7 @@ function takeTurn(columnNumber) {
 }
 
 function handleCellClick(rowIndex, columnIndex) {
-    console.log(`drawGrid: you clicked on cell R${rowIndex} C${columnIndex}.`);
+    console.log(`handleCellClick: you clicked on cell R${rowIndex} C${columnIndex}.`);
     takeTurn(columnIndex);
     const updatedGrid = currentConnectFourGridObject.getGrid();
     clearGrid()
