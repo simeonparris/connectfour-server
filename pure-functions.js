@@ -28,7 +28,7 @@ function addPlayer(playerName, playerNumber) {
 }
 
 function generateNewGrid(numberOfRows, numberOfColumns) {
-    let newGrid = new connectFourGrid(numberOfRows, numberOfColumns);
+    let newGrid = new ConnectFourGrid(numberOfRows, numberOfColumns);
     return newGrid;
 }
 
