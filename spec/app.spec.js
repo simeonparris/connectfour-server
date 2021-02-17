@@ -1,4 +1,4 @@
-const {connectFourGrid} = require('../classes');
+const {ConnectFourGrid} = require('../classes');
 const pf = require('../pure-functions');
 
 describe("Testing addPlayer function", () => {
@@ -26,9 +26,9 @@ describe("Testing addPlayer function", () => {
     });
 });
 
-describe("test connectFourGrid class", () => {
+describe("test ConnectFourGrid class", () => {
     test("initialize grid creates the correct structure", () => {
-        let classInstance = new connectFourGrid(2, 3);
+        let classInstance = new ConnectFourGrid(2, 3);
         let newGrid = classInstance.getGrid();
         let expectedGrid = [
             ["empty","empty","empty"],
@@ -38,8 +38,8 @@ describe("test connectFourGrid class", () => {
     });
 
     test("the grid attribute has an empty grid when the class is instantiated", () => {
-        let classInstance = new connectFourGrid(6, 7);
-        console.log(`TESTING connectFourGrid: the grid attribute is ${classInstance.grid}.`);
+        let classInstance = new ConnectFourGrid(6, 7);
+        console.log(`TESTING ConnectFourGrid: the grid attribute is ${classInstance.grid}.`);
         let newGrid = classInstance.getGrid();
         let expectedGrid = [
             ["empty","empty","empty","empty","empty","empty","empty"],
@@ -53,7 +53,7 @@ describe("test connectFourGrid class", () => {
     });
 
     test("clicking on a column adds filled at the bottom of an empty row", () => {
-        let classInstance = new connectFourGrid(2, 3);
+        let classInstance = new ConnectFourGrid(2, 3);
         classInstance.placeCounterInColumn(0);
         let newGrid = classInstance.getGrid();
         let expectedGrid = [
@@ -64,7 +64,7 @@ describe("test connectFourGrid class", () => {
     });
 
     test("clicking on a column adds filled above an existing filled cell.", () => {
-        let classInstance = new connectFourGrid(2, 3);
+        let classInstance = new ConnectFourGrid(2, 3);
         classInstance.placeCounterInColumn(0);
         classInstance.placeCounterInColumn(0);
         let newGrid = classInstance.getGrid();

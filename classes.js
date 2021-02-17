@@ -9,7 +9,7 @@ class Player {
     }
 }
 
-class connectFourGrid {
+class ConnectFourGrid {
 
     constructor(numberOfRows, numberOfColumns) {
         this.grid = this.initializeGrid(numberOfRows, numberOfColumns);
@@ -62,5 +62,5 @@ class connectFourGrid {
 
 module.exports = {
     Player,
-    connectFourGrid,
+    ConnectFourGrid,
 }
