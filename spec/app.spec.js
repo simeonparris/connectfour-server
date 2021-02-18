@@ -74,4 +74,18 @@ describe("test ConnectFourGrid class", () => {
         ];
         expect(newGrid).toStrictEqual(expectedGrid);
     });
+
+    describe.only("test checkForWinner function", () => {
+        test("a winner is not declared if only one move has been taken", () => {
+            let gridToCheck = [
+                ["empty", "empty","empty", "empty"],
+                ["empty", "empty","empty", "empty"],
+                ["empty", "empty","empty", "empty"],
+                ["filled", "empty","empty", "empty"],
+            ];
+            let lastPositionPlayed = [3, 0];
+            expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)).toStrictEqual(false);
+        });
+    });
+
 });

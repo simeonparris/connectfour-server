@@ -1,9 +1,20 @@
+if (typeof exports === 'object') {
+    console.log("Running app.js in Node");
+    // Node. Does not work with strict CommonJS, but only CommonJS-like 
+    // environments that support module.exports, like Node.
+    const { checkForWinner } = require("./pure-functions");
+} else {
+    console.log("Running app.js in Browser");
+}
+
 console.log('Running app.js');
 // variables available in the global scope
 let playerOneObject = undefined;
 let playerTwoObject = undefined;
 
 let currentConnectFourGridObject;
+
+let lastPositionPlayed = [];
 
 // functions
 function startGame () {
@@ -55,22 +66,29 @@ function drawGrid(gridToDraw) {
 function clearGrid() {
     const currentGridBody = document.getElementById("grid-body");
     console.log(`clearGrid: the number of child nodes is ${currentGridBody.childNodes.length}.`);
-    //const numberOfChildNodes = currentGridBody.childNodes.length;
     while (currentGridBody.firstChild) {
         console.log(`clearGrid: removing the child node ${currentGridBody.lastChild}.`);
         currentGridBody.removeChild(currentGridBody.lastChild);
     }
-    // for (let index = 0; index < numberOfChildNodes; index++) {
-    //     console.log(`clearGrid: the child node is: ${currentGridBody.childNodes[index]}.`);
-    //     currentGridBody.removeChild(currentGridBody.childNodes[index]);
-    // }
 }
 
 function takeTurn(columnNumber) {
-    // TODO - update grid
     console.log(`takeTurn: the grid before placing a counter is ${currentConnectFourGridObject.getGrid()}.`);
-    currentConnectFourGridObject.placeCounterInColumn(columnNumber);
+    // place a counter in the chosen column and update the grid
+    const resultOfPlacingCounter = currentConnectFourGridObject.placeCounterInColumn(columnNumber);
     console.log(`takeTurn: the grid is now ${currentConnectFourGridObject.getGrid()}.`);
+    console.log(`takeTurn: the grid returned by placeCounterInColumn is ${resultOfPlacingCounter[0]}.`);
+    const updatedGrid = resultOfPlacingCounter[0];
+    const lastUpdatedRow = resultOfPlacingCounter[1];
+    const lastUpdatedColumn = resultOfPlacingCounter[2];
+    const winnerExists = checkForWinner(updatedGrid, [lastUpdatedRow, lastUpdatedColumn]);
+    if (winnerExists) {
+        console.log("takeTurn: There is a winner!")
+        return;
+    } else {
+        console.log("takeTurn: There is NOT a winner.")
+        return updatedGrid;
+    }
 }
 
 function handleCellClick(rowIndex, columnIndex) {
