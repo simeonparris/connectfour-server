@@ -39,9 +39,10 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
     const lastColumnPlayed = lastPositionPlayed[1];
     console.log(`checkForWinner: the last column played is ${lastColumnPlayed} and its type is ${typeof lastColumnPlayed}.`);
     const playerToCheck = gridToCheck[lastRowPlayed][lastColumnPlayed];
+    console.log(`checkForWinner: the gridToCheck row count is ${gridToCheck.length} and the column count is ${gridToCheck[0].length}.`);
     console.log(`checkForWinner: the player to check is ${gridToCheck[lastRowPlayed][lastColumnPlayed]}`);
     let winningArray;
-    const undefinedArray = [undefined, undefined, undefined, undefined];
+    const undefinedArray = [undefined, undefined, undefined,];
 
     // win condition arrays
     let N_Array = [];
@@ -54,6 +55,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
     let NW_Array = [];
 
     if (lastRowPlayed >= gridToCheck.length -3) {
+        console.log("checkForWinner: N_Array is valid.");
         N_Array = [
             gridToCheck[lastRowPlayed -1][lastColumnPlayed],
             gridToCheck[lastRowPlayed -2][lastColumnPlayed],
@@ -63,6 +65,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         N_Array = undefinedArray;
     }
     if (lastRowPlayed >= gridToCheck.length -3 && lastColumnPlayed <= gridToCheck[0].length - 4) {
+        console.log("checkForWinner: NE_Array is valid.");
         NE_Array = [
             gridToCheck[lastRowPlayed -1][lastColumnPlayed +1],
             gridToCheck[lastRowPlayed -2][lastColumnPlayed +2],
@@ -71,7 +74,8 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
     } else {
         NE_Array = undefinedArray;
     }
-    if (lastColumnPlayed < gridToCheck.length[0] -4) {
+    if (lastColumnPlayed < gridToCheck[0].length -4) {
+        console.log("checkForWinner: E_Array is valid.");
         E_Array = [
             gridToCheck[lastRowPlayed][lastColumnPlayed +1],
             gridToCheck[lastRowPlayed][lastColumnPlayed +2],
@@ -81,7 +85,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         E_Array = undefinedArray;
     }
     if (lastRowPlayed <= gridToCheck.length - 4 && lastColumnPlayed <= gridToCheck[0].length - 4) {
-
+        console.log("checkForWinner: SE_Array is valid.");
         SE_Array = [
             gridToCheck[lastRowPlayed +1][lastColumnPlayed +1],
             gridToCheck[lastRowPlayed +2][lastColumnPlayed +2],
@@ -91,6 +95,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         SE_Array = undefinedArray;
     }
     if (lastRowPlayed <= gridToCheck.length - 4) {
+        console.log("checkForWinner: S_Array is valid.");
         S_Array = [
             gridToCheck[lastRowPlayed +1][lastColumnPlayed],
             gridToCheck[lastRowPlayed +2][lastColumnPlayed],
@@ -100,7 +105,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         S_Array = undefinedArray;
     }
     if (lastRowPlayed <= gridToCheck.length - 4 && lastColumnPlayed  >= 3) {
-
+        console.log("checkForWinner: SW_Array is valid.");
         SW_Array = [
             gridToCheck[lastRowPlayed +1][lastColumnPlayed -1],
             gridToCheck[lastRowPlayed +2][lastColumnPlayed -2],
@@ -110,7 +115,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         SW_Array = undefinedArray;
     }
     if (lastColumnPlayed  >= 3) {
-
+        console.log("checkForWinner: W_Array is valid.");
         W_Array = [
             gridToCheck[lastRowPlayed][lastColumnPlayed -1],
             gridToCheck[lastRowPlayed][lastColumnPlayed -2],
@@ -120,7 +125,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         W_Array = undefinedArray;
     }
     if (lastRowPlayed >= 3 && lastColumnPlayed  >= 3) {
-
+        console.log("checkForWinner: NW_Array is valid.");
         NW_Array = [
             gridToCheck[lastRowPlayed +1][lastColumnPlayed -1],
             gridToCheck[lastRowPlayed +2][lastColumnPlayed -2],
@@ -140,22 +145,9 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         NW_Array,
     ];
 
-    let theWinner = undefined;
+    console.log(`checkForWinner: arraysToCheck is currently - ${arraysToCheck}.`);
 
-    // TODO find a better solution using a for loop
-    // arraysToCheck.forEach((array, index) => {
-    //     const arrayCondition = array.includes(undefined);
-    //     if (arrayCondition === true) {
-    //         continue;
-    //     }
-    //     const stateOfTruth = array.every((cell) => {
-    //         return cell === playerToCheck;
-    //     });
-    //     if (stateOfTruth) {
-    //         theWinner = [playerToCheck, index];
-    //         break;
-    //     }
-    // });
+    let theWinner = undefined;
 
     for (let index = 0; index < arraysToCheck.length; index++) {
         console.log(`checkForWinner: currently checking index ${index}. Contents: ${arraysToCheck[index]}`);
@@ -166,7 +158,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
         const stateOfTruth = arraysToCheck[index].every((cell) => {
             return cell === playerToCheck;
         });
-        console.log(`checkForWinner: stateOfTruth${arraysToCheck[index]}`);
+        console.log(`checkForWinner: stateOfTruth is ${stateOfTruth}`);
         if (stateOfTruth) {
             theWinner = [playerToCheck, index];
             break;
@@ -174,6 +166,7 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
     }
 
     function outputWinningArrayIndices(winningArrayIndex) {
+        let winningArray = [];
         switch (winningArrayIndex) {
             case 0:
                 winningArray = [
@@ -249,6 +242,9 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
                 break;
             // default:
             //     break;
+        }
+        if (winningArray.length > 0) {
+            return winningArray;
         }
     }
 

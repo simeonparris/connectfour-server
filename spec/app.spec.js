@@ -88,4 +88,17 @@ describe("test ConnectFourGrid class", () => {
         });
     });
 
+    describe.only("test checkForWinner function", () => {
+        test("a winner is declared when four counter are placed in a single column", () => {
+            let gridToCheck = [
+                ["filled", "empty","empty", "empty"],
+                ["filled", "empty","empty", "empty"],
+                ["filled", "empty","empty", "empty"],
+                ["filled", "empty","empty", "empty"],
+            ];
+            let lastPositionPlayed = [0, 0];
+            expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)).toStrictEqual(true);
+        });
+    });
+
 });
