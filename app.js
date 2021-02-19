@@ -16,6 +16,8 @@ let currentConnectFourGridObject;
 
 let lastPositionPlayed = [];
 
+let weHaveAWinner = false;
+
 // functions
 function startGame () {
     const playerOneNameInput = document.getElementById('player-one-name-input').value;
@@ -85,7 +87,7 @@ function takeTurn(columnNumber) {
     if (winnerExists[0] === true) {
         console.log(`takeTurn: There is a winner! The winning four is [${winnerExists[1]}], [${winnerExists[2]}],[${winnerExists[3]}],[${winnerExists[4]}].`);
         alert(`We have a winner! Winning row is [${winnerExists[1]}], [${winnerExists[2]}],[${winnerExists[3]}],[${winnerExists[4]}].`);
-        return;
+        return winnerExists;
     } else {
         console.log("takeTurn: There is NOT a winner.")
         return updatedGrid;
@@ -94,7 +96,14 @@ function takeTurn(columnNumber) {
 
 function handleCellClick(rowIndex, columnIndex) {
     console.log(`handleCellClick: you clicked on cell R${rowIndex} C${columnIndex}.`);
-    takeTurn(columnIndex);
+    if (weHaveAWinner !== false) {
+        alert('Someone has already won. Please restart the game.');
+        return;
+    }
+    const resultOfTakeTurn = takeTurn(columnIndex);
+    if (resultOfTakeTurn[0] === true) {
+        weHaveAWinner = resultOfTakeTurn;
+    }
     const updatedGrid = currentConnectFourGridObject.getGrid();
     clearGrid()
     drawGrid(updatedGrid);
