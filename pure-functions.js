@@ -171,49 +171,49 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
             case 0: // N_Array,
                 winningArray = [
                     [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed + 1, lastColumnPlayed],
-                    [lastRowPlayed + 2, lastColumnPlayed],
-                    [lastRowPlayed + 3, lastColumnPlayed],
-                ]
-                break;
-                case 1: // NE_Array,
-                winningArray = [
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed + 1, lastColumnPlayed + 1],
-                    [lastRowPlayed + 2, lastColumnPlayed + 2],
-                    [lastRowPlayed + 3, lastColumnPlayed + 3],
-                ]
-                break;
-            case 2: // E_Array,
-                winningArray = [
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed + 1, lastColumnPlayed],
-                    [lastRowPlayed + 2, lastColumnPlayed],
-                    [lastRowPlayed + 3, lastColumnPlayed],
-                ]
-                break;
-            case 3: // SE_Array,
-            winningArray = [
-                [lastRowPlayed, lastColumnPlayed],
-                [lastRowPlayed + 1, lastColumnPlayed - 1],
-                [lastRowPlayed + 2, lastColumnPlayed - 2],
-                [lastRowPlayed + 3, lastColumnPlayed - 3],
-            ]
-                break;
-            case 4: // S_Array,
-                winningArray = [
-                    [lastRowPlayed, lastColumnPlayed],
                     [lastRowPlayed - 1, lastColumnPlayed],
                     [lastRowPlayed - 2, lastColumnPlayed],
                     [lastRowPlayed - 3, lastColumnPlayed],
                 ]
                 break;
+                case 1: // NE_Array,
+                winningArray = [
+                    [lastRowPlayed, lastColumnPlayed],
+                    [lastRowPlayed - 1, lastColumnPlayed + 1],
+                    [lastRowPlayed - 2, lastColumnPlayed + 2],
+                    [lastRowPlayed - 3, lastColumnPlayed + 3],
+                ]
+                break;
+            case 2: // E_Array,
+                winningArray = [
+                    [lastRowPlayed, lastColumnPlayed],
+                    [lastRowPlayed, lastColumnPlayed + 1],
+                    [lastRowPlayed, lastColumnPlayed + 2],
+                    [lastRowPlayed, lastColumnPlayed + 3],
+                ]
+                break;
+            case 3: // SE_Array,
+            winningArray = [
+                [lastRowPlayed, lastColumnPlayed],
+                [lastRowPlayed + 1, lastColumnPlayed + 1],
+                [lastRowPlayed + 2, lastColumnPlayed + 2],
+                [lastRowPlayed + 3, lastColumnPlayed + 3],
+            ]
+                break;
+            case 4: // S_Array,
+                winningArray = [
+                    [lastRowPlayed, lastColumnPlayed],
+                    [lastRowPlayed + 1, lastColumnPlayed],
+                    [lastRowPlayed + 2, lastColumnPlayed],
+                    [lastRowPlayed + 3, lastColumnPlayed],
+                ]
+                break;
             case 5: // SW_Array,
             winningArray = [
                 [lastRowPlayed, lastColumnPlayed],
-                [lastRowPlayed - 1, lastColumnPlayed - 1],
-                [lastRowPlayed - 2, lastColumnPlayed - 2],
-                [lastRowPlayed - 3, lastColumnPlayed - 3],
+                [lastRowPlayed + 1, lastColumnPlayed - 1],
+                [lastRowPlayed + 2, lastColumnPlayed - 2],
+                [lastRowPlayed + 3, lastColumnPlayed - 3],
             ]
                 break;
             case 6: // W_Array,
@@ -227,9 +227,9 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
             case 7: // NW_Array,
             winningArray = [
                 [lastRowPlayed, lastColumnPlayed],
-                [lastRowPlayed + 1, lastColumnPlayed - 1],
-                [lastRowPlayed + 2, lastColumnPlayed - 2],
-                [lastRowPlayed + 3, lastColumnPlayed - 3],
+                [lastRowPlayed - 1, lastColumnPlayed - 1],
+                [lastRowPlayed - 2, lastColumnPlayed - 2],
+                [lastRowPlayed - 3, lastColumnPlayed - 3],
             ]
                 break;
             // default:
@@ -241,9 +241,9 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
     }
 
     if (theWinner !== undefined) {
-        return outputWinningArrayIndices(theWinner[1]);
+        return [true, ...outputWinningArrayIndices(theWinner[1])];
     } else {
-        return false;
+        return [false];
     }
 }
 

@@ -82,8 +82,8 @@ function takeTurn(columnNumber) {
     const lastUpdatedRow = resultOfPlacingCounter[1];
     const lastUpdatedColumn = resultOfPlacingCounter[2];
     const winnerExists = checkForWinner(updatedGrid, [lastUpdatedRow, lastUpdatedColumn]);
-    if (winnerExists) {
-        console.log(`takeTurn: There is a winner! The winning array is ${winnerExists}.`);
+    if (winnerExists[0] === true) {
+        console.log(`takeTurn: There is a winner! The winning four is [${winnerExists[1]}], [${winnerExists[2]}],[${winnerExists[3]}],[${winnerExists[4]}].`);
         return;
     } else {
         console.log("takeTurn: There is NOT a winner.")
