@@ -83,7 +83,7 @@ function takeTurn(columnNumber) {
     const lastUpdatedColumn = resultOfPlacingCounter[2];
     const winnerExists = checkForWinner(updatedGrid, [lastUpdatedRow, lastUpdatedColumn]);
     if (winnerExists) {
-        console.log("takeTurn: There is a winner!")
+        console.log(`takeTurn: There is a winner! The winning array is ${winnerExists}.`);
         return;
     } else {
         console.log("takeTurn: There is NOT a winner.")
@@ -102,16 +102,6 @@ function handleCellClick(rowIndex, columnIndex) {
 // Bindings for click events
 const startButton = document.getElementById("start-button");
 startButton.addEventListener("click", () => startGame());
-
-// init starts the program.
-// const init = () => {
-//     document
-//         .getElementById('start-button')
-//         .addEventListener('click', startGame);
-//         console.log("clicking start button");
-// }
-
-// document.addEventListener('DOMContentLoaded', init);
 
 module.exports = { 
     startGame,
