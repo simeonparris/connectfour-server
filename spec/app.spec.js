@@ -90,9 +90,6 @@ describe("test ConnectFourGrid class", () => {
             let lastPositionPlayed = [3, 0];
             expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)[0]).toStrictEqual(false);
         });
-    });
-
-    describe("test checkForWinner function", () => {
         test("a winner is declared when four counters are placed in a single column", () => {
             let gridToCheck = [
                 ["filled", "empty","empty", "empty"],
@@ -103,6 +100,34 @@ describe("test ConnectFourGrid class", () => {
             let lastPositionPlayed = [0, 0];
             expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)[0]).toStrictEqual(true);
         });
+        test("a winner is declared when four counters are placed in a single row", () => {
+            let gridToCheck = [
+                ["empty", "empty","empty", "empty"],
+                ["empty", "empty","empty", "empty"],
+                ["empty", "empty","empty", "empty"],
+                ["filled", "filled","filled", "filled"],
+            ];
+            let lastPositionPlayed = [0, 0];
+            expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)[0]).toStrictEqual(true);
+        });
     });
-
+    describe.only("tests checkRowForWinner", () => {
+        test("returns an one element array when passed a row of empty cells", () => {
+            inputRow = ["empty", "empty", "empty", "empty", "empty", "empty", "empty",];
+            const checkedRow = pf.checkRowForWinner(inputRow, "P1");
+            expect(checkedRow.length).toStrictEqual(0);
+        });
+        test("returns an array length < 4 when passed a loosing row", () => {
+            inputRow = ["empty", "P1", "P1", "P1", "empty", "empty", "empty",];
+            const checkedRow = pf.checkRowForWinner(inputRow, "P1");
+            expect(checkedRow.length).toStrictEqual(3);
+            expect(checkedRow).toStrictEqual([1,2,3]);
+        });
+        test("returns an array length 4 when passed a winning row", () => {
+            inputRow = ["P2", "P2", "P1", "P1", "P1", "P1", "P2",];
+            const checkedRow = pf.checkRowForWinner(inputRow, "P1");
+            expect(checkedRow.length).toStrictEqual(4);
+            expect(checkedRow).toStrictEqual([2,3,4,5]);
+        });
+    });
 });

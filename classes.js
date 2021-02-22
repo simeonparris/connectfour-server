@@ -25,13 +25,6 @@ class ConnectFourGrid {
             }
             initializedGrid.push(newRowArray);
         }
-        // for (let rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
-        //     for (let columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
-        //         initializedGrid[rowIndex][columnIndex] = `R${rowIndex} C${columnIndex}`;
-                
-        //     }
-            
-        // }
         return initializedGrid;
     }
 

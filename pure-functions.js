@@ -32,7 +32,49 @@ function generateNewGrid(numberOfRows, numberOfColumns) {
     return newGrid;
 }
 
-function checkForWinner(gridToCheck, lastPositionPlayed) {
+function checkRowForWinner(currentRowArray, player) {
+    let winningCount = 0;
+    let winningCells = [];
+    currentRowArray.forEach((cellContents, index) => {
+        if (cellContents === player) {
+            winningCells.push(index);
+        }
+    });
+    console.log(`checkRowForWinner: winningCells is ${winningCells}.`);
+    
+    // for (let index = 0; index < currentRowArray.length; index++) {
+    //     console.log(`checkRowForWinner: entering for loop - index is ${index} and cell contains ${currentRowArray[index]}.`);
+    //     if (winningCount === 4) return winningCells;
+    //     if (currentRowArray[index] === "empty") continue;
+    //     if (index === currentRowArray.length -1 && currentRowArray[index] === currentRowArray[index - 1]) {
+    //         winningCells.push(index);
+    //         continue;
+    //     } 
+    //     if (index === 0 && currentRowArray[index] === currentRowArray[index + 1]) {
+    //         console.log(`checkRowForWinner: same as next - pushing ${index} into ${winningCells}.`);
+    //         winningCount++;
+    //         winningCells.push(index);
+    //         console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
+    //     } else if (currentRowArray[index] !== currentRowArray[index + 1] && currentRowArray[index] === currentRowArray[index - 1]) {
+    //         console.log(`checkRowForWinner: same as next but not previous - pushing ${index} into ${winningCells}.`);
+    //         winningCount++;
+    //         winningCells.push(index);
+    //         console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
+    //     } else if (currentRowArray[index] !== currentRowArray[index + 1] && currentRowArray[index] === currentRowArray[index - 1]) {
+    //         console.log(`checkRowForWinner: same as previous but not next- pushing ${index} into ${winningCells}.`);
+    //         winningCount++;
+    //         winningCells.push(index);
+    //         console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
+    //     } else {
+    //         console.log(`checkRowForWinner: resetting count because - index is ${index} and cell contains ${currentRowArray[index]}.`);
+    //         winningCount = 0;
+    //         winningCells = [];
+    //     }
+    // }
+    return winningCells;
+}
+
+function checkForWinner(gridToCheck, lastPositionPlayed, player) {
     // check each of the cardinal and ordinal points around the last position played for four of the same 
     const lastRowPlayed = lastPositionPlayed[0];
     console.log(`checkForWinner: the last row played is ${lastRowPlayed} and its type is ${typeof lastRowPlayed}.`);
@@ -53,6 +95,11 @@ function checkForWinner(gridToCheck, lastPositionPlayed) {
     let SW_Array = [];
     let W_Array = [];
     let NW_Array = [];
+
+    let rowArray = [];
+    let columnArray = [];
+    let NWtoSEArray = [];
+    let SWtoNEArray = [];
 
     if (lastRowPlayed >= gridToCheck.length -3) {
         console.log("checkForWinner: N_Array is valid.");
@@ -251,4 +298,5 @@ module.exports = {
     addPlayer,
     generateNewGrid,
     checkForWinner,
+    checkRowForWinner,
 }
