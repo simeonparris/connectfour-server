@@ -133,5 +133,11 @@ describe("test ConnectFourGrid class", () => {
             expect(checkedRow.length).toStrictEqual(4);
             expect(checkedRow).toStrictEqual([2,3,4,5]);
         });
+        test("returns an array length 4 when passed a winning row", () => {
+            inputRow = ["P2", "P2", "P1", "P2", "P2", "P2", "P2",];
+            const checkedRow = pf.checkRowForWinner(inputRow, "P2");
+            expect(checkedRow.length).toStrictEqual(4);
+            expect(checkedRow).toStrictEqual([3,4,5,6]);
+        });
     });
 });

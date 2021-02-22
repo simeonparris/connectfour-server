@@ -46,17 +46,16 @@ function hideNameInputBoxes() {
 }
 
 function drawGrid(gridToDraw) {
-    // TODO make this function draw a full-sized grid
-    console.log(`drawGrid: Drawing a grid with ${gridToDraw.length} rows...`);
+    console.log(`drawGrid: Drawing a grid with ${gridToDraw.length} rows and ${gridToDraw[0].length}`);
     let currentGridBody = document.getElementById("grid-body");
     for (let rowIndex = 0; rowIndex < gridToDraw.length; rowIndex++) {
-        console.log(`drawGrid: populating row ${rowIndex}.`);
+        //console.log(`drawGrid: populating row ${rowIndex}.`);
         let gridRow = document.createElement("tr");
         gridRow.id = `row-${rowIndex}`;
         gridRow.classList.add("row");
         currentGridBody.appendChild(gridRow);
         for (let columnIndex = 0; columnIndex < gridToDraw[rowIndex].length; columnIndex++) {
-            console.log(`drawGrid: populating cell ${columnIndex} of row ${rowIndex} with ${gridToDraw[rowIndex][columnIndex]}.`);
+            //console.log(`drawGrid: populating cell ${columnIndex} of row ${rowIndex} with ${gridToDraw[rowIndex][columnIndex]}.`);
             let gridCell = document.createElement("td");
             gridCell.classList.add("grid-cell");
             gridCell.id = `row-${rowIndex}-column-${columnIndex}`;
@@ -70,9 +69,9 @@ function drawGrid(gridToDraw) {
 
 function clearGrid() {
     const currentGridBody = document.getElementById("grid-body");
-    console.log(`clearGrid: the number of child nodes is ${currentGridBody.childNodes.length}.`);
+    //console.log(`clearGrid: the number of child nodes is ${currentGridBody.childNodes.length}.`);
     while (currentGridBody.firstChild) {
-        console.log(`clearGrid: removing the child node ${currentGridBody.lastChild}.`);
+        //console.log(`clearGrid: removing the child node ${currentGridBody.lastChild}.`);
         currentGridBody.removeChild(currentGridBody.lastChild);
     }
 }
@@ -81,7 +80,7 @@ function takeTurn(columnNumber, player) {
     console.log(`takeTurn: the grid before placing a counter is ${currentConnectFourGridObject.getGrid()}.`);
     // place a counter in the chosen column and update the grid
     const resultOfPlacingCounter = currentConnectFourGridObject.placeCounterInColumn(columnNumber, player);
-    console.log(`takeTurn: the grid is now ${currentConnectFourGridObject.getGrid()}.`);
+    // console.log(`takeTurn: the grid is now ${currentConnectFourGridObject.getGrid()}.`);
     console.log(`takeTurn: the grid returned by placeCounterInColumn is ${resultOfPlacingCounter[0]}.`);
     const updatedGrid = resultOfPlacingCounter[0];
     const lastUpdatedRow = resultOfPlacingCounter[1];
@@ -110,12 +109,13 @@ function handleCellClick(rowIndex, columnIndex) {
         return;
     }
     const resultOfTakeTurn = takeTurn(columnIndex, currentPlayer);
-    changePlayer();
     if (resultOfTakeTurn[0] === true) {
         weHaveAWinner = resultOfTakeTurn;
     }
-    const updatedGrid = currentConnectFourGridObject.getGrid();
-    clearGrid()
+    const updatedGrid = resultOfTakeTurn;
+    // currentConnectFourGridObject.getGrid();
+    changePlayer();
+    clearGrid();
     drawGrid(updatedGrid);
 }
 
