@@ -117,11 +117,15 @@ describe("test ConnectFourGrid class", () => {
             const checkedRow = pf.checkRowForWinner(inputRow, "P1");
             expect(checkedRow.length).toStrictEqual(0);
         });
-        test("returns an array length < 4 when passed a loosing row", () => {
+        test("returns an empty array when passed a loosing row", () => {
             inputRow = ["empty", "P1", "P1", "P1", "empty", "empty", "empty",];
             const checkedRow = pf.checkRowForWinner(inputRow, "P1");
-            expect(checkedRow.length).toStrictEqual(3);
-            expect(checkedRow).toStrictEqual([1,2,3]);
+            expect(checkedRow.length).toStrictEqual(0);
+        });
+        test("does not return an array length 4 when passed a loosing row containing four of the same", () => {
+            inputRow = ["P1", "P2", "P2", "P1", "P1", "P1", "P2",];
+            const checkedRow = pf.checkRowForWinner(inputRow, "P1");
+            expect(checkedRow.length).toStrictEqual(0);
         });
         test("returns an array length 4 when passed a winning row", () => {
             inputRow = ["P2", "P2", "P1", "P1", "P1", "P1", "P2",];

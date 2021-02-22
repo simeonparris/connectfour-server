@@ -35,42 +35,37 @@ function generateNewGrid(numberOfRows, numberOfColumns) {
 function checkRowForWinner(currentRowArray, player) {
     let winningCount = 0;
     let winningCells = [];
-    currentRowArray.forEach((cellContents, index) => {
-        if (cellContents === player) {
-            winningCells.push(index);
-        }
-    });
-    console.log(`checkRowForWinner: winningCells is ${winningCells}.`);
-    
-    // for (let index = 0; index < currentRowArray.length; index++) {
-    //     console.log(`checkRowForWinner: entering for loop - index is ${index} and cell contains ${currentRowArray[index]}.`);
-    //     if (winningCount === 4) return winningCells;
-    //     if (currentRowArray[index] === "empty") continue;
-    //     if (index === currentRowArray.length -1 && currentRowArray[index] === currentRowArray[index - 1]) {
+    // currentRowArray.forEach((cellContents, index) => {
+    //     if (cellContents === player) {
     //         winningCells.push(index);
-    //         continue;
-    //     } 
-    //     if (index === 0 && currentRowArray[index] === currentRowArray[index + 1]) {
-    //         console.log(`checkRowForWinner: same as next - pushing ${index} into ${winningCells}.`);
-    //         winningCount++;
-    //         winningCells.push(index);
-    //         console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
-    //     } else if (currentRowArray[index] !== currentRowArray[index + 1] && currentRowArray[index] === currentRowArray[index - 1]) {
-    //         console.log(`checkRowForWinner: same as next but not previous - pushing ${index} into ${winningCells}.`);
-    //         winningCount++;
-    //         winningCells.push(index);
-    //         console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
-    //     } else if (currentRowArray[index] !== currentRowArray[index + 1] && currentRowArray[index] === currentRowArray[index - 1]) {
-    //         console.log(`checkRowForWinner: same as previous but not next- pushing ${index} into ${winningCells}.`);
-    //         winningCount++;
-    //         winningCells.push(index);
-    //         console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
-    //     } else {
-    //         console.log(`checkRowForWinner: resetting count because - index is ${index} and cell contains ${currentRowArray[index]}.`);
-    //         winningCount = 0;
-    //         winningCells = [];
     //     }
-    // }
+    // });
+    // console.log(`checkRowForWinner: winningCells is ${winningCells}.`);
+    
+    for (let index = 0; index < currentRowArray.length; index++) {
+        console.log(`checkRowForWinner: entering for loop - index is ${index} and cell contains ${currentRowArray[index]}.`);
+        if (winningCount === 4) return winningCells;
+        if (currentRowArray[index] !== player) {
+            winningCount = 0;
+            winningCells = [];
+            continue;
+        }
+        if (index === currentRowArray.length -1 && currentRowArray[index] === currentRowArray[index - 1]) {
+            winningCells.push(index);
+            continue;
+        } 
+        if (currentRowArray[index] === currentRowArray[index + 1]) {
+            console.log(`checkRowForWinner: same as next - pushing ${index} into ${winningCells}.`);
+            winningCount++;
+            winningCells.push(index);
+            console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
+        } else if (currentRowArray[index] === currentRowArray[index - 1]) {
+            console.log(`checkRowForWinner: same as previous - pushing ${index} into ${winningCells}.`);
+            winningCount++;
+            winningCells.push(index);
+            console.log(`checkRowForWinner: winningCells is now ${winningCells}.`);
+        }
+    }
     return winningCells;
 }
 
