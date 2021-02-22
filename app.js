@@ -14,6 +14,8 @@ let playerTwoObject = undefined;
 
 let currentConnectFourGridObject;
 
+let currentPlayer;
+
 let lastPositionPlayed = [];
 
 let weHaveAWinner = false;
@@ -31,6 +33,7 @@ function startGame () {
     console.log(`startGame: the new grid to draw is ${newGrid}.`);
     console.log(`startGame: the length of the new grid is ${newGrid.length}.`);
     hideNameInputBoxes();
+    currentPlayer = "P1";
     drawGrid(newGrid);
 }
 
@@ -44,7 +47,7 @@ function hideNameInputBoxes() {
 
 function drawGrid(gridToDraw) {
     // TODO make this function draw a full-sized grid
-    console.log(`drawGrid: Drawing a grid with ${gridToDraw.length} rows...`)
+    console.log(`drawGrid: Drawing a grid with ${gridToDraw.length} rows...`);
     let currentGridBody = document.getElementById("grid-body");
     for (let rowIndex = 0; rowIndex < gridToDraw.length; rowIndex++) {
         console.log(`drawGrid: populating row ${rowIndex}.`);
@@ -74,10 +77,10 @@ function clearGrid() {
     }
 }
 
-function takeTurn(columnNumber) {
+function takeTurn(columnNumber, player) {
     console.log(`takeTurn: the grid before placing a counter is ${currentConnectFourGridObject.getGrid()}.`);
     // place a counter in the chosen column and update the grid
-    const resultOfPlacingCounter = currentConnectFourGridObject.placeCounterInColumn(columnNumber);
+    const resultOfPlacingCounter = currentConnectFourGridObject.placeCounterInColumn(columnNumber, player);
     console.log(`takeTurn: the grid is now ${currentConnectFourGridObject.getGrid()}.`);
     console.log(`takeTurn: the grid returned by placeCounterInColumn is ${resultOfPlacingCounter[0]}.`);
     const updatedGrid = resultOfPlacingCounter[0];
@@ -94,13 +97,20 @@ function takeTurn(columnNumber) {
     }
 }
 
+function changePlayer() {
+    const playerBeforeChange = currentPlayer;
+    currentPlayer === "P1" ? currentPlayer = "P2" : currentPlayer = "P1";
+    console.log(`changePlayer: changed player from ${playerBeforeChange} to ${currentPlayer}.`);
+}
+
 function handleCellClick(rowIndex, columnIndex) {
     console.log(`handleCellClick: you clicked on cell R${rowIndex} C${columnIndex}.`);
     if (weHaveAWinner !== false) {
         alert('Someone has already won. Please restart the game.');
         return;
     }
-    const resultOfTakeTurn = takeTurn(columnIndex);
+    const resultOfTakeTurn = takeTurn(columnIndex, currentPlayer);
+    changePlayer();
     if (resultOfTakeTurn[0] === true) {
         weHaveAWinner = resultOfTakeTurn;
     }

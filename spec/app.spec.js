@@ -53,29 +53,33 @@ describe("test ConnectFourGrid class", () => {
     });
 
     test("clicking on a column adds filled at the bottom of an empty row", () => {
-        let classInstance = new ConnectFourGrid(2, 3);
-        classInstance.placeCounterInColumn(0);
+        let classInstance = new ConnectFourGrid(4, 4);
+        classInstance.placeCounterInColumn(0, "filled");
         let newGrid = classInstance.getGrid();
         let expectedGrid = [
-            ["empty","empty","empty"],
-            ["filled","empty","empty"],
+            ["empty", "empty","empty", "empty"],
+            ["empty", "empty","empty", "empty"],
+            ["empty", "empty","empty", "empty"],
+            ["filled", "empty","empty", "empty"],
         ];
         expect(newGrid).toStrictEqual(expectedGrid);
     });
 
     test("clicking on a column adds filled above an existing filled cell.", () => {
-        let classInstance = new ConnectFourGrid(2, 3);
-        classInstance.placeCounterInColumn(0);
-        classInstance.placeCounterInColumn(0);
+        let classInstance = new ConnectFourGrid(4, 4);
+        classInstance.placeCounterInColumn(0, "filled");
+        classInstance.placeCounterInColumn(0, "filled");
         let newGrid = classInstance.getGrid();
         let expectedGrid = [
-            ["filled","empty","empty"],
-            ["filled","empty","empty"],
+            ["empty", "empty","empty", "empty"],
+            ["empty", "empty","empty", "empty"],
+            ["filled", "empty","empty", "empty"],
+            ["filled", "empty","empty", "empty"],
         ];
         expect(newGrid).toStrictEqual(expectedGrid);
     });
 
-    describe.only("test checkForWinner function", () => {
+    describe("test checkForWinner function", () => {
         test("a winner is not declared if only one move has been taken", () => {
             let gridToCheck = [
                 ["empty", "empty","empty", "empty"],
@@ -84,12 +88,12 @@ describe("test ConnectFourGrid class", () => {
                 ["filled", "empty","empty", "empty"],
             ];
             let lastPositionPlayed = [3, 0];
-            expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)).toStrictEqual(false);
+            expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)[0]).toStrictEqual(false);
         });
     });
 
-    describe.only("test checkForWinner function", () => {
-        test("a winner is declared when four counter are placed in a single column", () => {
+    describe("test checkForWinner function", () => {
+        test("a winner is declared when four counters are placed in a single column", () => {
             let gridToCheck = [
                 ["filled", "empty","empty", "empty"],
                 ["filled", "empty","empty", "empty"],
@@ -97,7 +101,7 @@ describe("test ConnectFourGrid class", () => {
                 ["filled", "empty","empty", "empty"],
             ];
             let lastPositionPlayed = [0, 0];
-            expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)).toStrictEqual(true);
+            expect(pf.checkForWinner(gridToCheck, lastPositionPlayed)[0]).toStrictEqual(true);
         });
     });
 

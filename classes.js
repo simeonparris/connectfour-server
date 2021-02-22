@@ -39,20 +39,20 @@ class ConnectFourGrid {
         return this.grid;
     }
 
-    placeCounterInColumn(columnNumber) {
-        console.log(`placeCounterInColumn: called with column ${columnNumber}.`);
+    placeCounterInColumn(columnNumber, player) {
+        console.log(`placeCounterInColumn: called with column ${columnNumber} for player ${player}.`);
         let filledCell = false;
         let filledCellRow = null;
         for (let rowIndex = this.grid.length - 1; filledCell === false; rowIndex--) {
             // TODO - write loop to only place counter in the first free position
             const currentValue = this.grid[rowIndex][columnNumber];
-            console.log(`placeCounterInColumn: in for loop - R${rowIndex} C${columnNumber} filledCell = ${filledCell} currentValue is ${currentValue}.`);
-            if (this.grid[rowIndex][columnNumber] === "filled") {
+            console.log(`placeCounterInColumn: in for loop - R${rowIndex} C${columnNumber} and filledCell = ${filledCell} currentValue is ${currentValue}.`);
+            if (this.grid[rowIndex][columnNumber] !== "empty") {
                 console.log(`placeCounterInColumn: grid R${rowIndex} C${columnNumber} is ${currentValue} - moving to the next row.`)
             } else {
                 console.log(`placeCounterInColumn: grid R${rowIndex} C${columnNumber} is ${currentValue} - filling the cell.`);
-                this.grid[rowIndex][columnNumber] = "filled";
-                console.log(`placeCounterInColumn: grid R${rowIndex} C${columnNumber} is now ${currentValue}.`);
+                this.grid[rowIndex][columnNumber] = player;
+                console.log(`placeCounterInColumn: grid R${rowIndex} C${columnNumber} is now ${this.grid[rowIndex][columnNumber]}.`);
                 filledCell = true;
                 filledCellRow = rowIndex;
             } 
