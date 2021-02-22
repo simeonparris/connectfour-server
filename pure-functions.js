@@ -73,93 +73,82 @@ function checkForWinner(gridToCheck, lastPositionPlayed, player) {
     // gridToCheck[lastRowPlayed][lastColumnPlayed];
     console.log(`checkForWinner: the gridToCheck row count is ${gridToCheck.length} and the column count is ${gridToCheck[0].length}.`);
     console.log(`checkForWinner: the player to check is ${gridToCheck[lastRowPlayed][lastColumnPlayed]}`);
-    let winningArray;
+    // let winningArray;
     // const undefinedArray = [undefined, undefined, undefined,];
 
     // win condition arrays
-    // let N_Array = [];
-    // let NE_Array = [];
-    // let E_Array = [];
-    // let SE_Array = [];
-    // let S_Array = [];
-    // let SW_Array = [];
-    // let W_Array = [];
-    // let NW_Array = [];
-
     let rowArray = gridToCheck[lastRowPlayed];
     let columnArray = [];
     let NWtoSEArray = [];
     let SWtoNEArray = [];
+
+    let NWtoSEWinIndices = [];
+    let SWtoNEWinIndices = [];
 
     // populates column array
     for (let rowIndex = 0; rowIndex < gridToCheck.length; rowIndex++) {
         columnArray.push(gridToCheck[rowIndex][lastColumnPlayed]);
     }
     
-    // populates NW to SE array
-    // for (let rowIndex = lastRowPlayed - 3; rowIndex < lastRowPlayed + 3; rowIndex++) {
-    //     if (rowIndex < 0 || rowIndex > gridToCheck.length - 1) {
-    //         console.log("TRYING to populate NW to SE Array: rowIndex out of range");
-    //     }
-    //     for (let columnIndex = lastColumnPlayed - 3; columnIndex < lastColumnPlayed + 3; columnIndex++) {
-    //         if (columnIndex < 0 || columnIndex > gridToCheck[0].length - 1) {
-    //             console.log("TRYING to populate NW to SE Array: columnIndex out of range");
-    //             continue;
-    //         }
-    //         console.log(`populating NW to SE Array: rowIndex is ${rowIndex} and columnIndex is ${columnIndex}, pushing "${gridToCheck[rowIndex][columnIndex]}".`);
-    //         NWtoSEArray.push(gridToCheck[rowIndex][columnIndex]);
-    //         // console.log(`TRYING to populate NW to SE Array: last row played was ${lastRowPlayed} and row index is ${rowIndex}.`);
-    //         // console.log(`TRYING to populate NW to SE Array: last column was ${lastColumnPlayed} and column index is ${columnIndex}.`);
-    //         // if (rowIndex < 0 
-    //         //     || rowIndex > gridToCheck.length - 1 
-    //         //     || columnIndex < 0 
-    //         //     || columnIndex > gridToCheck[0].length - 1) {
-    //         //         continue;
-    //         //     } else {
-    //         //     }
-                
-    //         }
-            
-    //     }
-        function populateNWtoSEArray(gridToCheck, lastRowPlayed, lastColumnPlayed) {
-            let lastRow = lastRowPlayed;
-            let lastColumn = lastColumnPlayed;
-            if (lastRow < 0) lastRow = 0;
-            if (lastColumn < 0) lastColumn = 0;
-            for (let rowIndex = lastRow; rowIndex < gridToCheck.length - 1; rowIndex++) {
-                if (rowIndex < 0 || rowIndex > gridToCheck.length - 1) {
-                    console.log("TRYING to populate NW to SE Array: rowIndex out of range");
-                }
-                for (let columnIndex = lastColumn; columnIndex < gridToCheck[0].length - 1; columnIndex++) {
-                    if (columnIndex < 0 || columnIndex > gridToCheck[0].length - 1) {
-                        console.log("TRYING to populate NW to SE Array: columnIndex out of range");
-                        continue;
-                    }
-                    console.log(`populating NW to SE Array: rowIndex is ${rowIndex} and columnIndex is ${columnIndex}, pushing "${gridToCheck[rowIndex][columnIndex]}".`);
-                    NWtoSEArray.push(gridToCheck[rowIndex][columnIndex]);                        
-                    }
-                    
-                }
-                console.log(`populateNWtoSEArray: array contains - "${NWtoSEArray}".`);
-        }
-        populateNWtoSEArray(gridToCheck, lastRowPlayed, lastColumnPlayed);
+    // populates NW to SE array                       
+    function populateNWtoSEArray(gridToCheck, lastRowPlayed, lastColumnPlayed) {
+        console.log("populateNWtoSEArray: calling Function")
+        let count = -3;
 
-        // populates SW to NE array
-        for (let rowIndex = lastRowPlayed + 3; rowIndex > lastRowPlayed - 3; rowIndex--) {
-            for (let columnIndex = lastColumnPlayed - 3; columnIndex < lastColumnPlayed + 3; columnIndex++) {
-                if (rowIndex < 0 
-                    || rowIndex > gridToCheck.length - 1 
-                    || columnIndex < 0 
-                    || columnIndex > gridToCheck[0].length - 1) {
-                        continue;
-                    } else {
-                // console.log(`populating SW to NE Array: rowIndex is ${rowIndex} and columnIndex is ${columnIndex}.`);
-                SWtoNEArray.push(gridToCheck[rowIndex][columnIndex]);
-            }
+        for (let index = 0; index < 7; index++) {
+            console.log(`populateNWtoSEArray: count is ${count} ...`)
+            console.log(`...and lastRowPlayed + count is ${lastRowPlayed + count} and lastColumnPlayed + count is ${lastColumnPlayed + count}.`)
             
+            if (lastRowPlayed + count >= 0
+                && lastRowPlayed + count <= gridToCheck.length - 1 
+                && lastColumnPlayed + count >= 0
+                && lastColumnPlayed + count <= gridToCheck[0].length - 1
+                ) {
+                console.log(`populateNWtoSEArray: pushing ${gridToCheck[lastRowPlayed + count][lastColumnPlayed + count]} into the array.`)
+                NWtoSEArray.push(gridToCheck[lastRowPlayed + count][lastColumnPlayed + count]);
+                NWtoSEWinIndices.push([lastRowPlayed + count, lastColumnPlayed + count]);          
+                console.log(`populateNWtoSEArray: NWtoSEArray is now ${NWtoSEArray}.`)
+                count++;
+            } else {
+                count++;
+            }               
         }
-        
+        if (NWtoSEWinIndices.length < 4) {
+            NWtoSEWinIndices = [];
+        }
     }
+
+    populateNWtoSEArray(gridToCheck, lastRowPlayed, lastColumnPlayed);
+
+    // populates SW to NE array
+    function populateSWtoNEArray(gridToCheck, lastRowPlayed, lastColumnPlayed) {
+        //console.log("populateSWtoNEArray: calling Function")
+        let rowCount = +3;
+        let columnCount = -3;
+
+        for (let index = 0; index < 7; index++) {
+            //console.log(`populateSWtoNEArray: row count is ${rowCount}, column count is ${columnCount} ...`)
+            //console.log(`...and lastRowPlayed + row count is ${lastRowPlayed + rowCount} and lastColumnPlayed + column count is ${lastColumnPlayed + columnCount}.`)
+
+            if (lastRowPlayed + rowCount >= 0
+                && lastRowPlayed + rowCount <= gridToCheck.length - 1 
+                && lastColumnPlayed + columnCount >= 0
+                && lastColumnPlayed + columnCount <= gridToCheck[0].length - 1
+                ) {
+                SWtoNEArray.push(gridToCheck[lastRowPlayed + rowCount][lastColumnPlayed + columnCount]);
+                SWtoNEWinIndices.push([lastRowPlayed + rowCount, lastColumnPlayed + columnCount]);          
+                rowCount--
+                columnCount++;
+            } else {
+                rowCount--
+                columnCount++;
+            }               
+        }
+        if (SWtoNEWinIndices.length < 4) {
+            SWtoNEWinIndices = [];
+        }
+    }
+    populateSWtoNEArray(gridToCheck, lastRowPlayed, lastColumnPlayed);
 
     console.log("THE ARRAYS TO CHECK...");
     console.log(`The ROW ARRAY is ${rowArray}.`);                
@@ -260,40 +249,30 @@ function checkForWinner(gridToCheck, lastPositionPlayed, player) {
     let theWinner = undefined;
 
     for (let index = 0; index < arraysToCheck.length; index++) {
-        let checkedRow = checkRowForWinner(arraysToCheck[index], playerToCheck);
-        if (checkedRow.length === 4) {
+        let checkedArray = checkRowForWinner(arraysToCheck[index], playerToCheck);
+        if (checkedArray.length === 4) {
             switch (index) {
                 case 0: // rowArray
                 theWinner = [true, 
-                            [lastRowPlayed, arraysToCheck[index][0]],
-                            [lastRowPlayed, arraysToCheck[index][1]],
-                            [lastRowPlayed, arraysToCheck[index][2]],
-                            [lastRowPlayed, arraysToCheck[index][3]]
+                            [lastRowPlayed, checkedArray[0]],
+                            [lastRowPlayed, checkedArray[1]],
+                            [lastRowPlayed, checkedArray[2]],
+                            [lastRowPlayed, checkedArray[3]]
                         ]
                 break;
                 case 1: // columnArray
                 theWinner = [true, 
-                            [arraysToCheck[index][0], lastColumnPlayed],
-                            [arraysToCheck[index][1], lastColumnPlayed],
-                            [arraysToCheck[index][2], lastColumnPlayed],
-                            [arraysToCheck[index][3], lastColumnPlayed]
+                            [checkedArray[0], lastColumnPlayed],
+                            [checkedArray[1], lastColumnPlayed],
+                            [checkedArray[2], lastColumnPlayed],
+                            [checkedArray[3], lastColumnPlayed]
                         ]
                 break;
                 case 2: // NWtoSEArray
-                theWinner = [true, 
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed, lastColumnPlayed]
-                ]
+                theWinner = [true, ...NWtoSEWinIndices];
                     break;
                 case 3: // SWtoNEArray
-                theWinner = [true, 
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed, lastColumnPlayed],
-                    [lastRowPlayed, lastColumnPlayed]
-                ]
+                theWinner = [true, ...SWtoNEWinIndices];
                     break;    
             }
         }
