@@ -37,7 +37,6 @@ class ConnectFourGrid {
         let filledCell = false;
         let filledCellRow = null;
         for (let rowIndex = this.grid.length - 1; filledCell === false; rowIndex--) {
-            // TODO - write loop to only place counter in the first free position
             const currentValue = this.grid[rowIndex][columnNumber];
             console.log(`placeCounterInColumn: in for loop - R${rowIndex} C${columnNumber} and filledCell = ${filledCell} currentValue is ${currentValue}.`);
             if (this.grid[rowIndex][columnNumber] !== "empty") {

@@ -2,8 +2,8 @@ const playerOneNameInput = document.getElementById('player-one-name-input').valu
 const playerTwoNameInput = document.getElementById('player-two-name-input').value;
 
 // Bindings for click events
-const startButton = document.getElementById("start-button");
-startButton.addEventListener("click", () => startGame());
+// const startButton = document.getElementById("start-button");
+// startButton.addEventListener("click", () => startGame());
 
 function drawGrid(gridToDraw) {
     console.log(`drawGrid: Drawing a grid with ${gridToDraw.length} rows and ${gridToDraw[0].length}`);

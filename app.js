@@ -4,15 +4,16 @@ if (typeof exports === 'object') {
     // environments that support module.exports, like Node.
     const { checkForWinner } = require("./pure-functions");
     const { drawGrid, clearGrid, hideNameInputBoxes, getPlayerNameInputValue } = require('./dom-access');
+    const {updatePlayer, initializeGame, putCounterInColumn} = require('./requests');
 } else {
     console.log("Running app.js in Browser");
 }
 
 // variables available in the global scope
-let playerOneObject = undefined;
-let playerTwoObject = undefined;
+// let playerOneObject = undefined;
+// let playerTwoObject = undefined;
 
-let currentConnectFourGridObject;
+// let currentConnectFourGridObject;
 
 let currentPlayer;
 
@@ -22,14 +23,20 @@ let weHaveAWinner = false;
 
 // functions
 function startGame () {
+    console.log('startGame: Starting...');
     const playerOneNameInput = getPlayerNameInputValue('player-one-name-input');
     const playerTwoNameInput = getPlayerNameInputValue('player-two-name-input');
-    playerOneObject = addPlayer(playerOneNameInput, 1);
-    playerTwoObject = addPlayer(playerTwoNameInput, 2);
-    console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
-    const newGridObject = generateNewGrid(6, 7);
-    currentConnectFourGridObject = newGridObject;
-    const newGrid = newGridObject.getGrid();
+    console.log(`startGame: The player names are ${playerOneNameInput} and ${playerTwoNameInput}.`);
+    let updateP1Response = updatePlayer(playerOneNameInput, 1);
+    let updateP2Response = updatePlayer(playerTwoNameInput, 2);
+    console.log(`startGame: P1 update response is ${updateP1Response}.`);
+    console.log(`startGame: P2 update response is ${updateP2Response}.`);
+
+    // console.log(`Player One's name is ${playerOneObject.playerName} and Player Two's name is ${playerTwoObject.playerName}.`);
+    // const newGridObject = generateNewGrid(6, 7);
+    // currentConnectFourGridObject = newGridObject;
+    //const newGrid = newGridObject.getGrid();
+    const newGrid = initializeGame(6, 7);
     console.log(`startGame: the new grid to draw is ${newGrid}.`);
     console.log(`startGame: the length of the new grid is ${newGrid.length}.`);
     hideNameInputBoxes();
@@ -77,9 +84,9 @@ function startGame () {
 // }
 
 function takeTurn(columnNumber, player) {
-    console.log(`takeTurn: the grid before placing a counter is ${currentConnectFourGridObject.getGrid()}.`);
+    // console.log(`takeTurn: the grid before placing a counter is ${currentConnectFourGridObject.getGrid()}.`);
     // place a counter in the chosen column and update the grid
-    const resultOfPlacingCounter = currentConnectFourGridObject.placeCounterInColumn(columnNumber, player);
+    const resultOfPlacingCounter = putCounterInColumn(columnNumber, player);
     // console.log(`takeTurn: the grid is now ${currentConnectFourGridObject.getGrid()}.`);
     console.log(`takeTurn: the grid returned by placeCounterInColumn is ${resultOfPlacingCounter[0]}.`);
     const updatedGrid = resultOfPlacingCounter[0];
@@ -120,16 +127,17 @@ function handleCellClick(rowIndex, columnIndex) {
 }
 
 // Bindings for click events
-// const startButton = document.getElementById("start-button");//clearGrid
-// startButton.addEventListener("click", () => startGame());
+const startButton = document.getElementById("start-button");
+startButton.addEventListener("click", () => startGame());
 
 module.exports = { 
     startGame,
-    playerOneObject,
-    playerTwoObject,
+    //playerOneObject,
+    //playerTwoObject,
     handleCellClick,
     takeTurn,
     changePlayer,
+    //currentConnectFourGridObject,
 };
 
 
