@@ -3,6 +3,7 @@ if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but only CommonJS-like 
     // environments that support module.exports, like Node.
     global.Player = require('./classes').Player;
+    global.ConnectFourGrid = require('./classes').ConnectFourGrid;
 } else {
     console.log("Running pure-functions.js in Browser");
 }
@@ -155,87 +156,6 @@ function checkForWinner(gridToCheck, lastPositionPlayed, player) {
     console.log(`The COLUMN ARRAY is ${columnArray}.`);    
     console.log(`The NW to SE ARRAY is ${NWtoSEArray}.`);  
     console.log(`The SW to NE ARRAY is ${SWtoNEArray}.`);   
-  
-    // if (lastRowPlayed >= gridToCheck.length -3) {
-    //     console.log("checkForWinner: N_Array is valid.");
-    //     N_Array = [
-    //         gridToCheck[lastRowPlayed -1][lastColumnPlayed],
-    //         gridToCheck[lastRowPlayed -2][lastColumnPlayed],
-    //         gridToCheck[lastRowPlayed -3][lastColumnPlayed],
-    //     ];
-    // } else {
-    //     N_Array = undefinedArray;
-    // }
-    // if (lastRowPlayed >= gridToCheck.length -3 && lastColumnPlayed <= gridToCheck[0].length - 4) {
-    //     console.log("checkForWinner: NE_Array is valid.");
-    //     NE_Array = [
-    //         gridToCheck[lastRowPlayed -1][lastColumnPlayed +1],
-    //         gridToCheck[lastRowPlayed -2][lastColumnPlayed +2],
-    //         gridToCheck[lastRowPlayed -3][lastColumnPlayed +3],
-    //     ];
-    // } else {
-    //     NE_Array = undefinedArray;
-    // }
-    // if (lastColumnPlayed < gridToCheck[0].length -4) {
-    //     console.log("checkForWinner: E_Array is valid.");
-    //     E_Array = [
-    //         gridToCheck[lastRowPlayed][lastColumnPlayed +1],
-    //         gridToCheck[lastRowPlayed][lastColumnPlayed +2],
-    //         gridToCheck[lastRowPlayed][lastColumnPlayed +3],
-    //     ];
-    // } else {
-    //     E_Array = undefinedArray;
-    // }
-    // if (lastRowPlayed <= gridToCheck.length - 4 && lastColumnPlayed <= gridToCheck[0].length - 4) {
-    //     console.log("checkForWinner: SE_Array is valid.");
-    //     SE_Array = [
-    //         gridToCheck[lastRowPlayed +1][lastColumnPlayed +1],
-    //         gridToCheck[lastRowPlayed +2][lastColumnPlayed +2],
-    //         gridToCheck[lastRowPlayed +3][lastColumnPlayed +3],
-    //     ];
-    // } else {
-    //     SE_Array = undefinedArray;
-    // }
-    // if (lastRowPlayed <= gridToCheck.length - 4) {
-    //     console.log("checkForWinner: S_Array is valid.");
-    //     S_Array = [
-    //         gridToCheck[lastRowPlayed +1][lastColumnPlayed],
-    //         gridToCheck[lastRowPlayed +2][lastColumnPlayed],
-    //         gridToCheck[lastRowPlayed +3][lastColumnPlayed],
-    //     ];
-    // } else {
-    //     S_Array = undefinedArray;
-    // }
-    // if (lastRowPlayed <= gridToCheck.length - 4 && lastColumnPlayed  >= 3) {
-    //     console.log("checkForWinner: SW_Array is valid.");
-    //     SW_Array = [
-    //         gridToCheck[lastRowPlayed +1][lastColumnPlayed -1],
-    //         gridToCheck[lastRowPlayed +2][lastColumnPlayed -2],
-    //         gridToCheck[lastRowPlayed +3][lastColumnPlayed -3],
-    //     ];
-    // } else {
-    //     SW_Array = undefinedArray;
-    // }
-    // if (lastColumnPlayed  >= 3) {
-    //     console.log("checkForWinner: W_Array is valid.");
-    //     W_Array = [
-    //         gridToCheck[lastRowPlayed][lastColumnPlayed -1],
-    //         gridToCheck[lastRowPlayed][lastColumnPlayed -2],
-    //         gridToCheck[lastRowPlayed][lastColumnPlayed -3],
-    //     ];
-    // } else {
-    //     W_Array = undefinedArray;
-    // }
-    // if (lastRowPlayed >= 3 && lastColumnPlayed  >= 3) {
-    //     console.log("checkForWinner: NW_Array is valid.");
-    //     NW_Array = [
-    //         gridToCheck[lastRowPlayed +1][lastColumnPlayed -1],
-    //         gridToCheck[lastRowPlayed +2][lastColumnPlayed -2],
-    //         gridToCheck[lastRowPlayed +3][lastColumnPlayed -3],
-    //     ];
-    // } else {
-    //     NW_Array = undefinedArray;
-    // }
     
     const arraysToCheck = [
         rowArray,
@@ -277,97 +197,6 @@ function checkForWinner(gridToCheck, lastPositionPlayed, player) {
             }
         }
     }
-
-    // for (let index = 0; index < arraysToCheck.length; index++) {
-    //     console.log(`checkForWinner: currently checking index ${index}. Contents: ${arraysToCheck[index]}`);
-    //     const arrayCondition = arraysToCheck[index].includes(undefined);
-    //     if (arrayCondition === true) {
-    //         continue;
-    //     }
-    //     const stateOfTruth = arraysToCheck[index].every((cell) => {
-    //         return cell === playerToCheck;
-    //     });
-    //     console.log(`checkForWinner: stateOfTruth is ${stateOfTruth}`);
-    //     if (stateOfTruth) {
-    //         theWinner = [playerToCheck, index];
-    //         break;
-    //     }
-    // }
-
-    // function outputWinningArrayIndices(winningArrayIndex) {
-    //     let winningArray = [];
-    //     switch (winningArrayIndex) {
-    //         case 0: // N_Array,
-    //             winningArray = [
-    //                 [lastRowPlayed, lastColumnPlayed],
-    //                 [lastRowPlayed - 1, lastColumnPlayed],
-    //                 [lastRowPlayed - 2, lastColumnPlayed],
-    //                 [lastRowPlayed - 3, lastColumnPlayed],
-    //             ]
-    //             break;
-    //             case 1: // NE_Array,
-    //             winningArray = [
-    //                 [lastRowPlayed, lastColumnPlayed],
-    //                 [lastRowPlayed - 1, lastColumnPlayed + 1],
-    //                 [lastRowPlayed - 2, lastColumnPlayed + 2],
-    //                 [lastRowPlayed - 3, lastColumnPlayed + 3],
-    //             ]
-    //             break;
-    //         case 2: // E_Array,
-    //             winningArray = [
-    //                 [lastRowPlayed, lastColumnPlayed],
-    //                 [lastRowPlayed, lastColumnPlayed + 1],
-    //                 [lastRowPlayed, lastColumnPlayed + 2],
-    //                 [lastRowPlayed, lastColumnPlayed + 3],
-    //             ]
-    //             break;
-    //         case 3: // SE_Array,
-    //         winningArray = [
-    //             [lastRowPlayed, lastColumnPlayed],
-    //             [lastRowPlayed + 1, lastColumnPlayed + 1],
-    //             [lastRowPlayed + 2, lastColumnPlayed + 2],
-    //             [lastRowPlayed + 3, lastColumnPlayed + 3],
-    //         ]
-    //             break;
-    //         case 4: // S_Array,
-    //             winningArray = [
-    //                 [lastRowPlayed, lastColumnPlayed],
-    //                 [lastRowPlayed + 1, lastColumnPlayed],
-    //                 [lastRowPlayed + 2, lastColumnPlayed],
-    //                 [lastRowPlayed + 3, lastColumnPlayed],
-    //             ]
-    //             break;
-    //         case 5: // SW_Array,
-    //         winningArray = [
-    //             [lastRowPlayed, lastColumnPlayed],
-    //             [lastRowPlayed + 1, lastColumnPlayed - 1],
-    //             [lastRowPlayed + 2, lastColumnPlayed - 2],
-    //             [lastRowPlayed + 3, lastColumnPlayed - 3],
-    //         ]
-    //             break;
-    //         case 6: // W_Array,
-    //         winningArray = [
-    //             [lastRowPlayed, lastColumnPlayed],
-    //             [lastRowPlayed, lastColumnPlayed - 1],
-    //             [lastRowPlayed, lastColumnPlayed - 2],
-    //             [lastRowPlayed, lastColumnPlayed - 3],
-    //         ]
-    //             break;
-    //         case 7: // NW_Array,
-    //         winningArray = [
-    //             [lastRowPlayed, lastColumnPlayed],
-    //             [lastRowPlayed - 1, lastColumnPlayed - 1],
-    //             [lastRowPlayed - 2, lastColumnPlayed - 2],
-    //             [lastRowPlayed - 3, lastColumnPlayed - 3],
-    //         ]
-    //             break;
-    //         // default:
-    //         //     break;
-    //     }
-    //     if (winningArray.length > 0) {
-    //         return winningArray;
-    //     }
-    // }
 
     if (theWinner !== undefined) {
         return theWinner;
